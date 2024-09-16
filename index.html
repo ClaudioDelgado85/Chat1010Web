@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Buscador de Infracciones</title>
+        <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Buscador de Infracciones</h1>
+        <div class="search-container">
+            <input type="text" id="palabraClave" placeholder="Ingrese palabra clave">
+            <div class="button-group">
+                <button onclick="buscar()">Buscar</button>
+                <button onclick="limpiar()">Limpiar</button>
+                <button onclick="abrirPDF()">Abrir PDF</button>
+            </div>
+        </div>
+        <textarea id="resultados" readonly></textarea>
+    </div>
+
+    <script>
+        let preguntasRespuestas = [];
+
+        // Opción 1: Cargar desde un archivo en el servidor
+        function cargarDesdeArchivo() {
+            fetch('infracciones_generales.txt')
+                .then(response => response.text())
+                .then(text => {
+                    preguntasRespuestas = text.split('\n').map(linea => ({ texto: linea.trim() }));
+                })
+                .catch(error => console.error('Error al cargar el archivo:', error));
+        }
+
+
+        // Elige qué método de carga usar
+        // cargarDesdeArchivo();
+        cargarDesdeArchivo();  // Usamos esta opción por defecto para el ejemplo
+
+        function removeDiacritics(text) {
+            return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function buscar() {
+            const palabraClave = removeDiacritics(document.getElementById('palabraClave').value.trim().toLowerCase());
+            const resultadosTextArea = document.getElementById('resultados');
+            resultadosTextArea.value = '';
+
+            if (palabraClave === '') return;
+
+            let seEncontraronCoincidencias = false;
+
+            preguntasRespuestas.forEach(pr => {
+                const textoNormalizado = removeDiacritics(pr.texto.toLowerCase());
+                if (textoNormalizado.includes(palabraClave)) {
+                    resultadosTextArea.value += pr.texto + '\n';
+                    seEncontraronCoincidencias = true;
+                }
+            });
+
+            if (!seEncontraronCoincidencias) {
+                resultadosTextArea.value = "Lo siento, no se encontraron resultados para la palabra clave ingresada.";
+            }
+        }
+
+        function limpiar() {
+            document.getElementById('palabraClave').value = '';
+            document.getElementById('resultados').value = '';
+        }
+
+        function abrirPDF() {
+            // Asume que el PDF está en el servidor
+            window.open('Ordenanza_1010_2022.PDF', '_blank');
+        }
+    </script>
+</body>
+</html>
