@@ -19,6 +19,21 @@
             </div>
         </div>
         <textarea id="resultados" readonly></textarea>
+        <div id="sugerencias" class="sugerencias" style="display: none;">
+            <h3>Sugerencias de búsqueda:</h3>
+            <ul>
+                <li>25. NORMAS GENERALES PARA LAS MULTAS</li>
+                <li>26. FALTAS CONTRA LA AUTORIDAD MUNICIPAL</li>
+                <li>27. FALTAS CONTRA EL TRANSITO</li>
+                <li>28. FALTAS CONTRA EL TRANSPORTE PUBLICO</li>
+                <li>29. FALTAS CONTRA LA SEGURIDAD PUBLICA</li>
+                <li>30. FALTAS BROMATOLOGICAS</li>
+                <li>31. FALTAS CONTRA EL ORDEN Y EL BIENESTAR PUBLICO</li>
+                <li>32. FALTAS CONTRA EL EJERCICIO REGULAR DE ACTIVIDADES ECONOMICAS</li>
+                <li>33. FALTAS CONTRA EL ORDEN Y ESTETICA URBANA</li>
+            </ul>
+            <p>Intente buscar usando estas palabras clave o parte de ellas.</p>
+        </div>
     </div>
 
     <script>
@@ -46,7 +61,9 @@
         function buscar() {
             const palabraClave = removeDiacritics(document.getElementById('palabraClave').value.trim().toLowerCase());
             const resultadosTextArea = document.getElementById('resultados');
+            const sugerenciasDiv = document.getElementById('sugerencias');
             resultadosTextArea.value = '';
+            sugerenciasDiv.style.display = 'none';
 
             if (palabraClave === '') return;
 
@@ -61,7 +78,11 @@
             });
 
             if (!seEncontraronCoincidencias) {
-                resultadosTextArea.value = "Lo siento, no se encontraron resultados para la palabra clave ingresada.";
+                resultadosTextArea.value = "LO SIENTO NO SE ENCONTRARON RESULTADOS para la palabra ingresada Puede intentar nuevamente utilizando sinonimos o ver sugerencias";
+             // Mostrar sugerencias
+            
+             sugerenciasDiv.style.display = 'block';
+            
             }
         }
 

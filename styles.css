@@ -64,6 +64,44 @@ textarea {
     resize: vertical;
 }
 
+
+
+.sugerencias {
+    margin-top: 20px;
+    text-align: left;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.sugerencias h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.sugerencias ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sugerencias li {
+    margin-bottom: 5px;
+    color: #3498db;
+    cursor: pointer;
+}
+
+.sugerencias li:hover {
+    text-decoration: underline;
+}
+
+.sugerencias p {
+    margin-top: 10px;
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+
 /* Responsive design */
 @media (max-width: 600px) {
     .container {
