@@ -1,100 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Buscador de Infracciones</title>
-        <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Infracciones</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div class="container">
-        <h1>Buscador de Infracciones</h1>
-        <div class="search-container">
-            <input type="text" id="palabraClave" placeholder="Ingrese palabra clave">
-            <div class="button-group">
-                <button onclick="buscar()">Buscar</button>
-                <button onclick="limpiar()">Limpiar</button>
-                <button onclick="abrirPDF()">Abrir PDF</button>
+    <div class="chatbot-container">
+        <div class="chat-header">
+            <h1>Buscador de Infracciones</h1>
+        </div>
+         <!-- Mensaje de bienvenida -->
+         <div id="welcome-message" class="chat-output">
+            <p><strong>Bot:</strong> Buenos días, ¿cómo estás?</p>
+        </div>
+        <div id="welcome-message" class="chat-output">
+            <p><strong>Bot:</strong> Escribeme lo que estás buscando o elegí en el menú principal el tema que quieras consultar.</p>
+            <p><strong>Bot:</strong> Aquí tienes algunas infracciones frecuentes:</p>
+            <ol>
+                <li onclick="buscarPalabra('26.1')" class="lista-enlace">Por agredir o insultar al funcionario</li>
+                <li onclick="buscarPalabra('residuos')" class="lista-enlace">Por arrojar residuos y/o malezas</li>
+                <li onclick="buscarPalabra('quema')" class="lista-enlace">Por quema de basuras, pastizales</li>
+                <li onclick="buscarPalabra('32.1')" class="lista-enlace">Por falta de habilitacion comercial</li>
+                <li onclick="buscarPalabra('33.5')" class="lista-enlace">Por obstruccion de la via publica</li>
+                <li onclick="buscarPalabra('productos vencidos')" class="lista-enlace">Por venta de prod. vencidos</li>
+                <li onclick="buscarPalabra('31.1')" class="lista-enlace">Por realizar eventos sin autorizacion</li>
+                <li onclick="buscarPalabra('31.3')" class="lista-enlace">Por generar ruidos molestos</li>
+                <li onclick="buscarPalabra('bebidas alcoholicas')" class="lista-enlace">Por venta de bebidas alcoholicas fuera del horario permitido</li>
+            </ol>
+        </div>
+        <div class="chat-body" id="chat-body">
+            
+            <div id="resultados" class="chat-output" readonly></div>
+            <div id="sugerencias" class="sugerencias" style="display: none;">
+                
             </div>
         </div>
-        <textarea id="resultados" readonly></textarea>
-        <div id="sugerencias" class="sugerencias" style="display: none;">
-            <h3>Sugerencias de búsqueda:</h3>
-            <ul>
-                <li>25. NORMAS GENERALES PARA LAS MULTAS</li>
-                <li>26. FALTAS CONTRA LA AUTORIDAD MUNICIPAL</li>
-                <li>27. FALTAS CONTRA EL TRANSITO</li>
-                <li>28. FALTAS CONTRA EL TRANSPORTE PUBLICO</li>
-                <li>29. FALTAS CONTRA LA SEGURIDAD PUBLICA</li>
-                <li>30. FALTAS BROMATOLOGICAS</li>
-                <li>31. FALTAS CONTRA EL ORDEN Y EL BIENESTAR PUBLICO</li>
-                <li>32. FALTAS CONTRA EL EJERCICIO REGULAR DE ACTIVIDADES ECONOMICAS</li>
-                <li>33. FALTAS CONTRA EL ORDEN Y ESTETICA URBANA</li>
-            </ul>
-            <p>Intente buscar usando estas palabras clave o parte de ellas.</p>
+
+       
+
+        <div class="chat-input-container">
+            <input type="text" id="palabraClave" placeholder="Ingrese palabra clave" />
+            <button onclick="limpiar()">Limpiar</button>
+            <button onclick="abrirPDF()">Abrir PDF</button>
         </div>
     </div>
 
-    <script>
-        let preguntasRespuestas = [];
-
-        // Opción 1: Cargar desde un archivo en el servidor
-        function cargarDesdeArchivo() {
-            fetch('infracciones_generales.txt')
-                .then(response => response.text())
-                .then(text => {
-                    preguntasRespuestas = text.split('\n').map(linea => ({ texto: linea.trim() }));
-                })
-                .catch(error => console.error('Error al cargar el archivo:', error));
-        }
-
-
-        // Elige qué método de carga usar
-        // cargarDesdeArchivo();
-        cargarDesdeArchivo();  // Usamos esta opción por defecto para el ejemplo
-
-        function removeDiacritics(text) {
-            return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        }
-
-        function buscar() {
-            const palabraClave = removeDiacritics(document.getElementById('palabraClave').value.trim().toLowerCase());
-            const resultadosTextArea = document.getElementById('resultados');
-            const sugerenciasDiv = document.getElementById('sugerencias');
-            resultadosTextArea.value = '';
-            sugerenciasDiv.style.display = 'none';
-
-            if (palabraClave === '') return;
-
-            let seEncontraronCoincidencias = false;
-
-            preguntasRespuestas.forEach(pr => {
-                const textoNormalizado = removeDiacritics(pr.texto.toLowerCase());
-                if (textoNormalizado.includes(palabraClave)) {
-                    resultadosTextArea.value += pr.texto + '\n';
-                    seEncontraronCoincidencias = true;
-                }
-            });
-
-            if (!seEncontraronCoincidencias) {
-                resultadosTextArea.value = "LO SIENTO NO SE ENCONTRARON RESULTADOS para la palabra ingresada Puede intentar nuevamente utilizando sinonimos o ver sugerencias";
-             // Mostrar sugerencias
-            
-             sugerenciasDiv.style.display = 'block';
-            
-            }
-        }
-
-        function limpiar() {
-            document.getElementById('palabraClave').value = '';
-            document.getElementById('resultados').value = '';
-        }
-
-        function abrirPDF() {
-            // Asume que el PDF está en el servidor
-            window.open('Ordenanza_1010_2022.PDF', '_blank');
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

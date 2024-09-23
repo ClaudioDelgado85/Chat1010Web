@@ -1,115 +1,143 @@
-/* styles.css */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
     padding: 20px;
 }
 
-h1 {
-    text-align: center;
-    color: #2c3e50;
+.chatbot-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Ancho máximo del contenedor */
+    width: 100%; /* Ancho del contenedor en pantallas pequeñas */
+    margin: auto;
 }
 
-.search-container {
-    margin-bottom: 20px;
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+}
+
+.chat-body {
+    padding: 10px;
+    height: 300px; /* Altura fija para el área de resultados */
+    overflow-y: auto; /* Scroll si el contenido excede la altura */
+}
+
+.chat-output {
+    background-color: #e9ecef;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los mensajes del bot */
+.chat-output p {
+    margin: 5px 0; /* Espaciado entre líneas */
+}
+
+/* Mensajes del bot */
+#welcome-message p {
+    background-color: #d1ecf1; /* Color de fondo para el mensaje del bot */
+}
+
+/* Mensajes del usuario */
+.user-message {
+    background-color: #cce5ff; /* Color de fondo para los mensajes del usuario */
+}
+
+/* Estilos para sugerencias */
+.sugerencias {
+    margin-top: 10px; /* Margen superior */
+}
+
+/* Estilos para la entrada del chat */
+.chat-input-container {
+    display: flex; /* Flexbox para alinear los elementos */
 }
 
 input[type="text"] {
-    width: 100%;
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-.button-group {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+ol {
+    margin: 10px 0; /* Espaciado alrededor de la lista */
+    padding-left: 20px; /* Sangría a la izquierda */
 }
 
+ol li {
+    margin-bottom: 5px; /* Espaciado entre elementos de la lista */
+}
+
+.lista-enlace {
+    color: #007bff; /* Color azul como un enlace */
+    cursor: pointer; /* Cambia el cursor a una mano */
+    text-decoration: none; /* Subraya el texto */
+}
+
+.lista-enlace:hover {
+    color: #0056b3; /* Color más oscuro al pasar el mouse */
+    background-color: #e9ecef; /* Color de fondo al pasar el mouse */
+}
 button {
-    padding: 10px 20px;
-    margin: 5px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex-grow: 1;
+    margin-left: 5px; /* Espaciado entre botones */
+    padding: 10px 15px; /* Relleno del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    border: none; /* Sin borde */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
 }
 
+/* Efecto hover para botones */
 button:hover {
-    background-color: #2980b9;
+    background-color: #0056b3; /* Color al pasar el ratón */
 }
 
-textarea {
-    width: 100%;
-    height: 200px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    resize: vertical;
-}
-
-
-
-.sugerencias {
-    margin-top: 20px;
-    text-align: left;
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 4px;
-    padding: 15px;
-}
-
-.sugerencias h3 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.sugerencias ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sugerencias li {
-    margin-bottom: 5px;
-    color: #3498db;
-    cursor: pointer;
-}
-
-.sugerencias li:hover {
-    text-decoration: underline;
-}
-
-.sugerencias p {
-    margin-top: 10px;
-    font-style: italic;
-    color: #7f8c8d;
-}
-
-
-/* Responsive design */
+/* Media Queries para Responsividad */
 @media (max-width: 600px) {
-    .container {
-        padding: 10px;
+    .chatbot-container {
+        max-width: 100%; /* El contenedor ocupa todo el ancho en pantallas pequeñas */
+        padding: 10px; /* Relleno adicional en pantallas pequeñas */
+        box-shadow: none; /* Sin sombra en pantallas pequeñas */
+        border-radius: 5px; /* Bordes más suaves en pantallas pequeñas */
+    }
+
+    .chat-header h1 {
+        font-size: 1.5em; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+    }
+
+    .chat-body {
+        height: auto; /* Permitir que el área de resultados crezca automáticamente */
+        max-height: 250px; /* Altura máxima para mantener la usabilidad */
+        overflow-y: auto; /* Scroll si el contenido excede la altura máxima */
     }
 
     button {
-        width: 100%;
-        margin: 5px 0;
+        font-size: 0.9em; /* Tamaño de fuente más pequeño para botones en pantallas pequeñas */
+        padding: 8px; /* Relleno reducido para botones en pantallas pequeñas */
+    }
+
+    .lista-enlace {
+        color: #007bff; /* Color azul como un enlace */
+        cursor: pointer; /* Cambia el cursor a una mano */
+        text-decoration: underline; /* Subraya el texto */
+        padding: 10px; /* Aumenta el padding para mayor área táctil */
+        font-size: 1.2em; /* Aumenta el tamaño de fuente */
+    }
+
+    .lista-enlace {
+        margin-bottom: 5px; /* Espaciado entre elementos */
+    }
+
+    .lista-enlace:active {
+        background-color: #d1ecf1; /* Color de fondo al tocar */
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra interna al tocar */
     }
 }
