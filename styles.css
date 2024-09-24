@@ -127,9 +127,9 @@ button:hover {
     .lista-enlace {
         color: #007bff; /* Color azul como un enlace */
         cursor: pointer; /* Cambia el cursor a una mano */
-        text-decoration: underline; /* Subraya el texto */
+        text-decoration: none; /* Subraya el texto */
         padding: 10px; /* Aumenta el padding para mayor área táctil */
-        font-size: 1.2em; /* Aumenta el tamaño de fuente */
+       
     }
 
     .lista-enlace {
