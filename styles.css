@@ -103,7 +103,7 @@ button:hover {
 /* Media Queries para Responsividad */
 @media (max-width: 600px) {
     .chatbot-container {
-        max-width: 100%; /* El contenedor ocupa todo el ancho en pantallas pequeñas */
+        max-width: 95%; /* El contenedor ocupa todo el ancho en pantallas pequeñas */
         padding: 10px; /* Relleno adicional en pantallas pequeñas */
         box-shadow: none; /* Sin sombra en pantallas pequeñas */
         border-radius: 5px; /* Bordes más suaves en pantallas pequeñas */
