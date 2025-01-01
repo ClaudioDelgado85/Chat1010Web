@@ -1,143 +1,201 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --radius: 0.75rem;
+}
+
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.chatbot-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px; /* Ancho máximo del contenedor */
-    width: 100%; /* Ancho del contenedor en pantallas pequeñas */
-    margin: auto;
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
 }
 
-.chat-header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border-radius: 8px 8px 0 0;
+.container {
+    width: min(95%, 800px);
+    margin: 0 auto;
+    padding: clamp(1rem, 5vw, 2rem);
+}
+
+.header {
     text-align: center;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
 }
 
-.chat-body {
-    padding: 10px;
-    height: 300px; /* Altura fija para el área de resultados */
-    overflow-y: auto; /* Scroll si el contenido excede la altura */
+.header h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin-bottom: 0.5rem;
+    color: var(--text);
 }
 
-.chat-output {
-    background-color: #e9ecef;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+.subtitle {
+    color: var(--text-secondary);
+    font-size: clamp(0.875rem, 3vw, 1rem);
 }
 
-/* Estilos para los mensajes del bot */
-.chat-output p {
-    margin: 5px 0; /* Espaciado entre líneas */
+.search-container {
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
 }
 
-/* Mensajes del bot */
-#welcome-message p {
-    background-color: #d1ecf1; /* Color de fondo para el mensaje del bot */
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--surface);
+    padding: clamp(0.5rem, 2vw, 0.75rem);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
 }
 
-/* Mensajes del usuario */
-.user-message {
-    background-color: #cce5ff; /* Color de fondo para los mensajes del usuario */
+input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: clamp(0.875rem, 3vw, 1rem);
+    padding: 0.5rem;
+    background: transparent;
+    width: 100%;
 }
 
-/* Estilos para sugerencias */
-.sugerencias {
-    margin-top: 10px; /* Margen superior */
-}
-
-/* Estilos para la entrada del chat */
-.chat-input-container {
-    display: flex; /* Flexbox para alinear los elementos */
-}
-
-input[type="text"] {
-    flex-grow: 1; /* Ocupa todo el espacio disponible */
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-ol {
-    margin: 10px 0; /* Espaciado alrededor de la lista */
-    padding-left: 20px; /* Sangría a la izquierda */
-}
-
-ol li {
-    margin-bottom: 5px; /* Espaciado entre elementos de la lista */
-}
-
-.lista-enlace {
-    color: #007bff; /* Color azul como un enlace */
-    cursor: pointer; /* Cambia el cursor a una mano */
-    text-decoration: none; /* Subraya el texto */
-}
-
-.lista-enlace:hover {
-    color: #0056b3; /* Color más oscuro al pasar el mouse */
-    background-color: #e9ecef; /* Color de fondo al pasar el mouse */
-}
 button {
-    margin-left: 5px; /* Espaciado entre botones */
-    padding: 10px 15px; /* Relleno del botón */
-    border-radius: 5px; /* Bordes redondeados */
-    border: none; /* Sin borde */
-    background-color: #007bff; /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Efecto hover para botones */
-button:hover {
-    background-color: #0056b3; /* Color al pasar el ratón */
+.search-button, .clear-button {
+    color: var(--text-secondary);
 }
 
-/* Media Queries para Responsividad */
-@media (max-width: 600px) {
-    .chatbot-container {
-        max-width: 95%; /* El contenedor ocupa todo el ancho en pantallas pequeñas */
-        padding: 10px; /* Relleno adicional en pantallas pequeñas */
-        box-shadow: none; /* Sin sombra en pantallas pequeñas */
-        border-radius: 5px; /* Bordes más suaves en pantallas pequeñas */
-    }
+.search-button:hover, .clear-button:hover {
+    color: var(--primary-color);
+    background: var(--background);
+}
 
-    .chat-header h1 {
-        font-size: 1.5em; /* Tamaño de fuente más pequeño en pantallas pequeñas */
-    }
+.pdf-button {
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    padding: clamp(0.5rem, 2vw, 0.75rem);
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: clamp(0.875rem, 3vw, 1rem);
+}
 
-    .chat-body {
-        height: auto; /* Permitir que el área de resultados crezca automáticamente */
-        max-height: 250px; /* Altura máxima para mantener la usabilidad */
-        overflow-y: auto; /* Scroll si el contenido excede la altura máxima */
-    }
+.pdf-button:hover {
+    background: var(--primary-hover);
+}
 
-    button {
-        font-size: 0.9em; /* Tamaño de fuente más pequeño para botones en pantallas pequeñas */
-        padding: 8px; /* Relleno reducido para botones en pantallas pequeñas */
-    }
+/* Estilos para la sección de infracciones comunes */
+.common-infractions {
+    margin-bottom: 2rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
 
-    .lista-enlace {
-        color: #007bff; /* Color azul como un enlace */
-        cursor: pointer; /* Cambia el cursor a una mano */
-        text-decoration: none; /* Subraya el texto */
-        padding: 10px; /* Aumenta el padding para mayor área táctil */
-       
-    }
+.collapse-button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
 
-    .lista-enlace {
-        margin-bottom: 5px; /* Espaciado entre elementos */
-    }
+.collapse-button:hover {
+    background: var(--background);
+}
 
-    .lista-enlace:active {
-        background-color: #d1ecf1; /* Color de fondo al tocar */
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra interna al tocar */
+.collapse-button h2 {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    color: var(--text);
+    margin: 0;
+}
+
+.chevron-icon {
+    transition: transform 0.3s ease;
+    color: var(--text-secondary);
+}
+
+.common-infractions.collapsed .chevron-icon {
+    transform: rotate(-180deg);
+}
+
+.infractions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+    max-height: 2000px;
+    opacity: 1;
+}
+
+.common-infractions.collapsed .infractions-grid {
+    max-height: 0;
+    opacity: 0;
+    padding: 0 1rem;
+    pointer-events: none;
+}
+
+.infraction-card {
+    background: var(--background);
+    padding: 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border);
+}
+
+.infraction-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary-color);
+}
+
+.infraction-card h3 {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.infraction-card p {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Resto de los estilos... */
+
+@media (max-width: 640px) {
+    .infractions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .infraction-card {
+        padding: 0.75rem;
     }
 }

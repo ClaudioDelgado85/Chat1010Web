@@ -7,46 +7,96 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="chatbot-container">
-        <div class="chat-header">
+    <div class="container">
+        <header class="header">
             <h1>Buscador de Infracciones</h1>
+            <p class="subtitle">Encuentra información sobre infracciones de manera rápida y sencilla</p>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="palabraClave" 
+                    placeholder="Ingresa tu búsqueda..."
+                    autocomplete="off"
+                >
+                <button onclick="buscar()" class="search-button">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+                <button onclick="limpiar()" class="clear-button">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <button onclick="abrirPDF()" class="pdf-button">
+                Ver Ordenanza Completa (PDF)
+            </button>
         </div>
-         <!-- Mensaje de bienvenida -->
-         <div id="welcome-message" class="chat-output">
-            <p><strong>Bot:</strong> Buenos días, ¿cómo estás?</p>
-        </div>
-        <div id="welcome-message" class="chat-output">
-            <p><strong>Bot:</strong> Escribeme lo que estás buscando o elegí en el menú principal el tema que quieras consultar.</p>
-            <p><strong>Bot:</strong> Aquí tienes algunas infracciones frecuentes:</p>
-            <ol>
-                <li onclick="buscarPalabra('26.1')" class="lista-enlace">Por agredir o insultar al funcionario</li>
-                <li onclick="buscarPalabra('residuos')" class="lista-enlace">Por arrojar residuos y/o malezas</li>
-                <li onclick="buscarPalabra('quema')" class="lista-enlace">Por quema de basuras, pastizales</li>
-                <li onclick="buscarPalabra('32.1')" class="lista-enlace">Por falta de habilitacion comercial</li>
-                <li onclick="buscarPalabra('33.5')" class="lista-enlace">Por obstruccion de la via publica</li>
-                <li onclick="buscarPalabra('productos vencidos')" class="lista-enlace">Por venta de prod. vencidos</li>
-                <li onclick="buscarPalabra('31.1')" class="lista-enlace">Por realizar eventos sin autorizacion</li>
-                <li onclick="buscarPalabra('31.3')" class="lista-enlace">Por generar ruidos molestos</li>
-                <li onclick="buscarPalabra('bebidas alcoholicas')" class="lista-enlace">Por venta de bebidas alcoholicas fuera del horario permitido</li>
-            </ol>
-        </div>
-        <div class="chat-body" id="chat-body">
-            
-            <div id="resultados" class="chat-output" readonly></div>
-            <div id="sugerencias" class="sugerencias" style="display: none;">
-                
+
+        <div class="common-infractions">
+            <button class="collapse-button" onclick="toggleInfractions()">
+                <h2>Infracciones Frecuentes</h2>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                </svg>
+            </button>
+            <div class="infractions-grid">
+                <div class="infraction-card" onclick="buscarPalabra('26.1')">
+                    <h3>Agresión a funcionario</h3>
+                    <p>Por agredir o insultar al funcionario</p>
+                </div>
+                <div class="infraction-card" onclick="buscarPalabra('residuos')">
+                    <h3>Residuos</h3>
+                    <p>Por arrojar residuos y/o malezas</p>
+                </div>
+                <div class="infraction-card" onclick="buscarPalabra('quema')">
+                    <h3>Quema</h3>
+                    <p>Por quema de basuras, pastizales</p>
+                </div>
+                <div class="infraction-card" onclick="buscarPalabra('32.1')">
+                    <h3>Habilitación</h3>
+                    <p>Por falta de habilitación comercial</p>
+                </div>
+                <div class="infraction-card" onclick="buscarPalabra('33.5')">
+                    <h3>Vía pública</h3>
+                    <p>Por obstrucción de la vía pública</p>
+                </div>
+                <div class="infraction-card" onclick="buscarPalabra('productos vencidos')">
+                    <h3>Productos vencidos</h3>
+                    <p>Por venta de productos vencidos</p>
+                </div>
+                <div class="infraction-card" onclick="buscarPalabra('31.1')">
+                    <h3>Eventos</h3>
+                    <p>Por realizar eventos sin autorización</p>
+                </div>
+                <div class="infraction-card" onclick="buscarPalabra('31.3')">
+                    <h3>Ruidos molestos</h3>
+                    <p>Por generar ruidos molestos</p>
+                </div>
+                <div class="infraction-card" onclick="buscarPalabra('bebidas alcoholicas')">
+                    <h3>Bebidas alcohólicas</h3>
+                    <p>Por venta fuera del horario permitido</p>
+                </div>
             </div>
         </div>
 
-       
-
-        <div class="chat-input-container">
-            <input type="text" id="palabraClave" placeholder="Ingrese palabra clave" />
-            <button onclick="limpiar()">Limpiar</button>
-            <button onclick="abrirPDF()">Abrir PDF</button>
+        <div id="resultados" class="results"></div>
+        
+        <div id="sugerencias" class="suggestions" style="display: none;">
+            <h3>Sugerencias de búsqueda:</h3>
+            <div class="suggestions-grid">
+                <button onclick="buscarPalabra('estacionamiento')">Estacionamiento</button>
+                <button onclick="buscarPalabra('velocidad')">Velocidad</button>
+                <button onclick="buscarPalabra('licencia')">Licencia</button>
+                <button onclick="buscarPalabra('semaforo')">Semáforo</button>
+            </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
