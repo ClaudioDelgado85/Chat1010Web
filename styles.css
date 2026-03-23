@@ -57,8 +57,22 @@ body {
     padding: clamp(0.5rem, 2vw, 0.75rem);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem; /* Ajustado para dar lugar al hint */
 }
+
+.search-hint {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: left;
+    margin-bottom: 1.25rem;
+    padding: 0 0.25rem;
+    line-height: 1.4;
+}
+
+.search-hint strong {
+    color: var(--primary-color);
+}
+
 
 input {
     flex: 1;
@@ -117,27 +131,30 @@ button {
 .collapse-button {
     width: 100%;
     padding: 1rem;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    background: #10b981; /* Verde esmeralda suave */
+    border: none;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Centrado */
     cursor: pointer;
+    position: relative; /* Para la flecha a la derecha */
 }
 
 .collapse-button:hover {
-    background: var(--background);
+    background: #059669; /* Verde más oscuro al pasar el mouse */
 }
 
 .collapse-button h2 {
     font-size: clamp(1.25rem, 4vw, 1.75rem);
-    color: var(--text);
+    color: #ffffff; /* Letras blancas */
     margin: 0;
 }
 
 .chevron-icon {
     transition: transform 0.3s ease;
-    color: var(--text-secondary);
+    color: #ffffff;
+    position: absolute;
+    right: 1.25rem; /* La flecha queda pegada a la derecha */
 }
 
 .common-infractions.collapsed .chevron-icon {
@@ -188,7 +205,34 @@ button {
     line-height: 1.4;
 }
 
-/* Resto de los estilos... */
+/* Estilos para las tarjetas de resultados */
+.result-card {
+    background: var(--surface);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.article-number {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.article-text {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.6;
+}
 
 @media (max-width: 640px) {
     .infractions-grid {

@@ -24,6 +24,11 @@ window.buscar = () => {
     const results = searchManager.search(searchQuery);
     ui.displayResults(results, searchQuery);
     utils.scrollToElement('resultados');
+    
+    // Ocultar teclado en móviles
+    if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+    }
 };
 
 window.buscarPalabra = (palabra) => {
@@ -49,6 +54,29 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const searchInput = ui.elements.searchInput;
     if (searchInput) {
+        let debounceTimer;
+
+        // Búsqueda en tiempo real mientras escribe
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            
+            // Si borró todo, limpiamos la pantalla
+            if (searchInput.value.trim() === '') {
+                window.limpiar();
+                return;
+            }
+
+            // Esperamos 300ms después de que deja de teclear para buscar
+            debounceTimer = setTimeout(() => {
+                const searchQuery = searchInput.value;
+                const results = searchManager.search(searchQuery);
+                ui.displayResults(results, searchQuery);
+                // NOTA: Acá no ocultamos el teclado ni hacemos scroll automático
+                // para que pueda seguir escribiendo cómodamente.
+            }, 300);
+        });
+
+        // Mantenemos el Enter por si quiere forzar el scroll y ocultar el teclado
         searchInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();

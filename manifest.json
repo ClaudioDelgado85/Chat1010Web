@@ -1,0 +1,15 @@
+{
+  "name": "Buscador de Infracciones 1010",
+  "short_name": "Infracciones",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2889/2889312.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
